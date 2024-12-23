@@ -1,15 +1,33 @@
 
 .title {
-    background-clip: text;
-    color: transparent;
-    transition: background 0.3s ease;
-    animation: colorblender 5s infinite;
+    color: brown;
+    text-align: center;
 }
 
-@keyframes colorblender {
-    0% {background: linear-gradient(to right, red, cyan, green, pink);}
-    25% {background: linear-gradient(to right, pink, red, cyan, green);}
-    50% {background: linear-gradient(to right, green, pink, red, cyan);}
-    75% {background: linear-gradient(to right, cyan, green, pink, red);}
-    100% {background: linear-gradient(to right, red, cyan, green, pink);}
+table {
+    border: 2px solid black;
+}
+
+table tr td {
+    border: 2px solid black;
+}
+
+table tr td:nth-child(odd){
+    padding-left: 6px;
+    padding-right: 0.4rem;
+    font-weight: bold;
+}
+
+table tr td:nth-child(even){
+    min-width: 30rem;
+}
+
+table tr {
+    transition: background-color ease-out 0.3s;
+    transition: color ease-in-out 0.3s;
+}
+
+table tr:hover {
+    background-color: cadetblue;
+    color: white;
 }
