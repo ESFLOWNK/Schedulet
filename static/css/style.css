@@ -31,3 +31,34 @@ table tr:hover {
     background-color: cadetblue;
     color: white;
 }
+
+.taskInput {
+    border-color: transparent;
+    background-color: transparent;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: medium;
+    font-weight: lighter;
+    width: calc(100% - 2%);
+    transition: color ease-in-out 0.3s;
+}
+
+.taskInput:hover {
+    color: white;
+}
+
+.popup {
+    position: absolute;
+    top: 25%;
+    left: 20%;
+    background-color: aliceblue;
+    border: 2px solid rgba(0, 0, 0, 0.651);
+    border-radius: 15px;
+    box-shadow: 6px 6px 3px;
+    text-align: center;
+    width: 60%;
+    height: 30rem;
+}
+
+/* @keyframes popupEnter {
+
+} */
