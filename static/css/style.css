@@ -5,6 +5,7 @@
 }
 
 table {
+    float: left;
     border: 2px solid black;
 }
 
@@ -44,6 +45,27 @@ table tr:hover {
 
 .taskInput:hover {
     color: white;
+}
+
+.configpanel {
+    float: right;
+    margin-right: 3rem;
+    width: 40%;
+}
+
+.configpanel button {
+    width: 6rem;
+    height: 2rem;
+}
+
+.timein {
+    width: 4rem;
+    height: 1.4rem;
+}
+
+.panelin {
+    width: fit-content;
+    height: 1.4rem;
 }
 
 .popup {

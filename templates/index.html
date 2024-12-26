@@ -15,10 +15,11 @@
         <table>
         </table>
 
-        <div class="popup" hidden>
-            <h1>HELLO WORLD!</h1>
-            <input>
-            <button>Accept</button>
+        <div class="configpanel">
+            <button onclick="add()">Add</button>
+            <input placeholder="Time" id="addintime" class="timein" type="datetime">
+            <input placeholder="Task" id="addintask" class="panelin" onsubmit="add()">
+            <hr>
         </div>
     </body>
 </html>
