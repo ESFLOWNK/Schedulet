@@ -16,10 +16,14 @@
         </table>
 
         <div class="configpanel">
-            <button onclick="add()">Add</button>
+            <button onclick="add()" class="addButton">Add</button>
             <input placeholder="Time" id="addintime" class="timein" type="datetime">
-            <input placeholder="Task" id="addintask" class="panelin" onsubmit="add()">
+            <input placeholder="Task" id="addintask" class="panelin">
             <hr>
+            <button onclick="deleteTask()" class="deleteButton">Delete</button>
         </div>
+        
+        <!-- I know it's not the best way to do it, but it works :) -->
+        <input id="selected" value="-1" hidden>
     </body>
 </html>

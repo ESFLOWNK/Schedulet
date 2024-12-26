@@ -33,6 +33,11 @@ table tr:hover {
     color: white;
 }
 
+.selectedTask {
+    background-color: cadetblue;
+    color: white;
+}
+
 .taskInput {
     border-color: transparent;
     background-color: transparent;
@@ -53,8 +58,13 @@ table tr:hover {
     width: 40%;
 }
 
-.configpanel button {
+.addButton {
     width: 6rem;
+    height: 2rem;
+}
+
+.deleteButton {
+    width: 100%;
     height: 2rem;
 }
 

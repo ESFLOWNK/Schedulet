@@ -4,7 +4,7 @@ function setDefaultSchedule(){
 
     for(i = 6; i < 22; i++){
         const tr = document.createElement("tr");
-        tr.onclick = modifyTask;
+        tr.onclick = selectTask;
         tr.id = (i-6).toString();
         const td1 = document.createElement("td");
         const td2 = document.createElement("td");
@@ -30,6 +30,7 @@ function add(){
     td1.appendChild(document.createTextNode(document.getElementById("addintime").value));
     td2.appendChild(document.createTextNode(document.getElementById("addintask").value));
     
+    tr.onclick = selectTask;
     tr.id = document.querySelectorAll("tr").length-1;
 
     tr.appendChild(td1);
@@ -43,12 +44,31 @@ function add(){
     orderHours();
 }
 
+function deleteTask(){
+    const selection = document.getElementById("selected").value;
+    if(selection === "-1") return;
+    document.getElementById(selection).remove();
+    document.getElementById("selected").value = "-1";
+}
+
+function selectTask(event) {
+    let selected = document.getElementById("selected").value; 
+    if(selected == event.target.parentNode.id){
+        document.getElementById(selected).className = "";
+        document.getElementById("selected").value = "-1";
+        return;
+    }
+    if(selected != "-1") document.getElementById(selected).className = "";
+    document.getElementById("selected").value = event.target.parentNode.id;
+    selected = document.getElementById("selected").value;
+    document.getElementById(selected).className = "selectedTask";
+}
+
 function modifyTask(event) {
     console.log(event.target.parentNode.id);
 }
 
 function getTimebyRow(tr) {
-    console.log(tr);
     let timestr = tr.cells[0].innerText.replace(" ","").replace(":","");
     try {
         let plus = 0;
