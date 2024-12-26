@@ -51,6 +51,12 @@ function deleteTask(){
     document.getElementById("selected").value = "-1";
 }
 
+function deleteAllTasks(){
+    for(task of document.querySelectorAll("tr")){
+        document.getElementById(task.id).remove();
+    }
+}
+
 function selectTask(event) {
     let selected = document.getElementById("selected").value; 
     if(selected == event.target.parentNode.id){
