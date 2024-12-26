@@ -1,5 +1,12 @@
 
 function setDefaultSchedule(){
+    document.getElementById("selected").value = "-1";
+
+    document.getElementById("addintime").value = "";
+    document.getElementById("addintask").value = "";
+    document.getElementById("modifyintime").value = "";
+    document.getElementById("modifyintask").value = "";
+
     const table = document.querySelector("table");
 
     for(i = 6; i < 22; i++){
@@ -29,18 +36,18 @@ function add(){
 
     td1.appendChild(document.createTextNode(document.getElementById("addintime").value));
     td2.appendChild(document.createTextNode(document.getElementById("addintask").value));
-    
     tr.onclick = selectTask;
-    tr.id = document.querySelectorAll("tr").length-1;
-
+    
     tr.appendChild(td1);
     tr.appendChild(td2);
-
+    
     table.appendChild(tr);
-
+    
     document.getElementById("addintime").value = "";
     document.getElementById("addintask").value = "";
-
+    
+    assignIdentifiers();
+    
     orderHours();
 }
 
@@ -49,6 +56,7 @@ function deleteTask(){
     if(selection === "-1") return;
     document.getElementById(selection).remove();
     document.getElementById("selected").value = "-1";
+    assignIdentifiers();
 }
 
 function deleteAllTasks(){
@@ -58,7 +66,7 @@ function deleteAllTasks(){
 }
 
 function selectTask(event) {
-    let selected = document.getElementById("selected").value; 
+    let selected = document.getElementById("selected").value;
     if(selected == event.target.parentNode.id){
         document.getElementById(selected).className = "";
         document.getElementById("selected").value = "-1";
@@ -70,8 +78,58 @@ function selectTask(event) {
     document.getElementById(selected).className = "selectedTask";
 }
 
-function modifyTask(event) {
-    console.log(event.target.parentNode.id);
+function modifyTask() {
+    /* document.getElementById(
+        document.getElementById("selected").value
+    ).cells[0].innerText = document.getElementById("modifyintime").value;
+    document.getElementById(
+        document.getElementById("selected").value
+    ).cells[1].innerText = document.getElementById("modifyintask").value;
+
+    document.getElementById("modifyintime").value = "";
+    document.getElementById("modifyintask").value = ""; */
+
+    const selection = document.getElementById("selected").value;
+
+    if(selection == "-1") return;
+
+    document.getElementById(selection).remove()
+
+    const table = document.querySelector("table");
+
+    const tr = document.createElement("tr");
+
+    const td1 = document.createElement("td");
+    const td2 = document.createElement("td");
+
+    td1.appendChild(document.createTextNode(document.getElementById("modifyintime").value));
+    td2.appendChild(document.createTextNode(document.getElementById("modifyintask").value));
+    
+    tr.onclick = selectTask;
+    
+    tr.appendChild(td1);
+    tr.appendChild(td2);
+    
+    table.appendChild(tr);
+    
+    assignIdentifiers();
+    orderHours();
+
+    document.getElementById("selected").value = "-1";
+    for(task of document.querySelectorAll("tr")){
+        if(task.cells[0].innerText == document.getElementById("modifyintime").value &&
+           task.cells[1].innerText == document.getElementById("modifyintask").value)
+        {
+            document.getElementById("selected").value = task.id;
+            document.getElementById( 
+                document.getElementById("selected").value
+            ).className = "selectedTask";
+            break;
+        }
+    }
+
+    document.getElementById("modifyintime").value = "";
+    document.getElementById("modifyintask").value = "";
 }
 
 function getTimebyRow(tr) {
@@ -88,6 +146,14 @@ function getTimebyRow(tr) {
     } catch (e) {
         console.log("ERROR in getTimebyRow");
         return -1;
+    }
+}
+
+function assignIdentifiers() {
+    const tasks = document.querySelectorAll("tr");
+    
+    for(i = 0; i < tasks.length; i++){
+        tasks[i].id = (i).toString();
     }
 }
 
@@ -110,6 +176,13 @@ function orderHours(){
                 tasktoset = tasktoreplace;
             }
             break;
+        } else if(getTimebyRow(tasks[i-1]) > getTimebyRow(lasttask)){
+            let hourtoset = lasttask.cells[0].innerText;
+            let tasktoset = lasttask.cells[1].innerText;
+            lasttask.cells[0].innerText = tasks[i-1].cells[0].innerText;
+            lasttask.cells[1].innerText = tasks[i-1].cells[1].innerText;
+            tasks[i-1].cells[0].innerText = hourtoset;
+            tasks[i-1].cells[1].innerText = tasktoset;
         }
     }
 }
