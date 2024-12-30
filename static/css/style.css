@@ -28,6 +28,7 @@ table tr td:nth-child(even){
 table tr {
     transition: background-color ease-out 0.3s;
     transition: color ease-in-out 0.3s;
+    min-height: 2rem;
 }
 
 table tr:hover {

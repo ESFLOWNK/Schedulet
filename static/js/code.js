@@ -102,8 +102,18 @@ function modifyTask() {
     const td1 = document.createElement("td");
     const td2 = document.createElement("td");
 
-    td1.appendChild(document.createTextNode(document.getElementById("modifyintime").value));
-    td2.appendChild(document.createTextNode(document.getElementById("modifyintask").value));
+    let replacingtime = document.getElementById("modifyintime").value;
+    if(replacingtime == "") replacingtime = document.getElementById(
+        document.getElementById("selected").value
+    ).cells[0].innerText;
+
+    let replacingtask = document.getElementById("modifyintask").value;
+    if(replacingtask == "") replacingtask = document.getElementById(
+        document.getElementById("selected").value
+    ).cells[1].innerText;
+
+    td1.appendChild(document.createTextNode(replacingtime));
+    td2.appendChild(document.createTextNode(replacingtask));
     
     tr.onclick = selectTask;
     
@@ -137,7 +147,7 @@ function getTimebyRow(tr) {
     try {
         let plus = 0;
         if(timestr.includes("p.m.")){
-            plus = 1200;
+            if(timestr.split(":")[0] != "12") plus = 1200;
             timestr = timestr.replace("p.m.","")
         } else {
             timestr = timestr.replace("a.m.","");
